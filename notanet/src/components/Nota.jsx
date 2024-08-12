@@ -5,8 +5,9 @@ import './Nota.css';
 const Nota = () => {
   return (
     <Box
-      bg="linear-gradient(to top right, black,lightgray)"
+      bg="linear-gradient(to top right, black 50%, lightgray 100%)"
       color="white"
+      width="100%"
       minH="100vh"
       p={{ base: 4, md: 8 }}
     >
