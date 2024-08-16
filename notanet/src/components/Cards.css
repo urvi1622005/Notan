@@ -32,17 +32,22 @@
   gap: 140px;
   width:100vw;
   height: 40vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   }
   
   
   .card {
-  width: 200px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
   background-color: #333;
   border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
+  gap:40px;
   
   
   }
