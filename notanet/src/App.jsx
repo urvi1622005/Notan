@@ -7,6 +7,7 @@ function App() {
   return (
     <ChakraProvider>
       {/* <Nota /> */}
+      hii
       <Cards />
     </ChakraProvider>
   );
