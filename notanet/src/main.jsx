@@ -1,10 +1,15 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
+import React from 'react';
+import ReactDOM from 'react-dom/client'
+import { ChakraProvider } from '@chakra-ui/react';
+import Nota from './components/Nota.jsx';
+import Cards from './components/Cards.jsx';
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>    <ChakraProvider>
+    
+      <Nota />
+      <Cards/>
+      
+    </ChakraProvider>
+    </React.StrictMode>,
 )
