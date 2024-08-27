@@ -1,17 +1,14 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
 import Home from './components/Nota.jsx';
-import contact from './components/Cards.jsx';
+import Contact from './components/Cards.jsx';
 
 function App() {
   return (
     <Router>
       <div>
-        
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/contact" element={<contact />} ></Route>
-          
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </div>
     </Router>
