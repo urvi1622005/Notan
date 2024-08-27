@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {BrowserRouter as Router,  Route, Routes } from 'react-router-dom';
 import Home from './components/Nota.jsx';
 import Contact from './components/Cards.jsx';
 
@@ -8,7 +8,7 @@ function App() {
       <div>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/Contact" element={<Contact />}/> <Route/>
         </Routes>
       </div>
     </Router>
