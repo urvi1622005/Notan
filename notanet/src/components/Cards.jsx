@@ -14,7 +14,7 @@ const Cards = () => {
       {/* Replace Tab with a Link */}
       <nav className="tab-navigation">
         <Link to="/contact" className="tab-item">
-          Restaurant
+        
         </Link>
         {/* You can add more tabs here */}
       </nav>
