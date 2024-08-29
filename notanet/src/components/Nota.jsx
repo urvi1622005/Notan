@@ -20,7 +20,7 @@ const Nota = () => {
           NOTANET.COM
         </Text>
         <Flex as="ul" align="center" gap={{ base: 2, md: 6 }} listStyleType="none">
-          <li><Link href="#" fontSize={{ base: 'md', md: 'lg' }}>Contacts</Link></li>
+          <li><Link href="#" fontSize={{ base: 'md', md: 'lg' }}Contacts as={Link} to="/contact">contact</Link></li>
           <li><Link href="#" fontSize={{ base: 'md', md: 'lg' }}>Home</Link></li>
           <li><Link href="#" fontSize={{ base: 'md', md: 'lg' }}>Notes</Link></li>
           <li><Link href="#" fontSize={{ base: 'md', md: 'lg' }}>Roadmaps</Link></li>
