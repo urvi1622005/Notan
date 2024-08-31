@@ -13,7 +13,7 @@ function App() {
             Home
           </Button>
           <Button as={Link} to="/contact" colorScheme="teal">
-            Contact
+            Contact 
           </Button>
         </Flex>
         <Routes>
