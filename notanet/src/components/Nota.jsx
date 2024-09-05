@@ -98,17 +98,17 @@ const Nota = () => {
   </motion.div>
   <motion.div
     initial={{ rotate: 10, opacity: 0 }}
-    animate={{ rotate: 0, opacity: 1 }}
-    transition={{ duration: 0.8, delay: 1 }}
+    animate={{ rotate: -1, opacity: 1 }}
+    transition={{ duration: 2, delay: 1 }}
   >
     <Text 
       fontSize={{ base: '4xl', md: '6xl', lg: '8xl' }} 
       fontWeight="bold" 
-      ml={{ base: 2, md: -6, lg: -10 }}
+      ml={{ base: 2, md: -3, lg: 2 }}
       color="white" // Ensuring "LEARNIN'" remains white
       textShadow="2px 2px 4px rgba(0,0,0,0.5)" // Added text shadow for consistency
     >
-      LEARNIN'
+       LEARNIN'
     </Text>
   </motion.div>
 </Flex>
