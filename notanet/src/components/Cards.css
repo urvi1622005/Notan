@@ -151,4 +151,119 @@
   .card-content h2 {
     margin-bottom: 10px;
   }
+  .head {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #fffb00;
+    text-shadow: 2px 2px 8px rgba(255, 115, 0, 0.8);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00);
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: gradient-text 5s ease infinite;
+  }
   
+  @keyframes gradient-text {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+  }
+  h3 {
+    font-size: 1.5rem;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    margin-bottom: 40px;
+    font-style: italic;
+  }
+  /* Cards.css */
+
+.cards-container {
+  text-align: center;
+  padding: 50px;
+  color: white;
+}
+
+.cards-container header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.home-icon {
+  font-size: 2rem;
+  color: #4fd1c5; /* teal.300 */
+}
+
+/* Styling for h1 */
+.head {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #4fd1c5; /* teal.300 */
+  text-shadow: 2px 2px 8px rgba(79, 209, 197, 0.8); /* teal.300 */
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  background: linear-gradient(45deg, #4fd1c5, #81e6d9, #38b2ac);
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: gradient-text 5s ease infinite;
+}
+
+@keyframes gradient-text {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* Styling for h3 */
+h3 {
+  font-size: 1.5rem;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  margin-bottom: 40px;
+  font-style: italic;
+}
+
+/* Styling for cards */
+.card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  margin: 0 20px;
+  border-radius: 12px;
+  width: 250px;
+  cursor: pointer;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-content {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+/* Card title and description */
+.card h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #4fd1c5; /* teal.300 */
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+/* Hover effects for card */
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 15px rgba(79, 209, 197, 0.3); /* teal.300 */
+}
+
+/* For background parallax */
+.parallax-bg {
+  filter: brightness(0.7);
+}
