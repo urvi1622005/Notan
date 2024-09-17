@@ -21,12 +21,14 @@ const Cards = () => {
       <div className="cards-container">
         <header>
           <FaHome className="home-icon" />
-          <span>Home</span>
+          <span>Your study path </span>
         </header>
+        <h1 className="head">Roadmaps</h1>
+        <h3>Your next 4 year path is here choose your stream and start following this path from today!!</h3>
 
-        <nav className="tab-navigation">
+        {/* <nav className="tab-navigation">
           <Link to="/contact" className="tab-item">Contact</Link>
-        </nav>
+        </nav> */}
 
         <main style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
           {cardContent.map((card, index) => (
