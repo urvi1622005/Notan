@@ -1,16 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Cards.css';
 import { FaHome } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Parallax } from 'react-parallax';
 
+
+// Import the PDF viewer and image modal
+import { Document, Page } from 'react-pdf';
+import Modal from 'react-modal'; // For displaying images and PDF
+import websiteImage from '../assets/website.jpg';
+import dsaPDF from '../assets/dsa.pdf';
+import androidPDF from '../assets/android.pdf';
+
+
 const Cards = () => {
+  const [selectedContent, setSelectedContent] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+
   const cardContent = [
-    { title: "Web Development", description: "Learn the art of creating stunning websites" },
-    { title: "Data Science", description: "Dive into the world of data analysis and machine learning" },
-    { title: "Mobile App Development", description: "Create powerful apps for iOS and Android" },
+    { title: "Web Development", description: "Learn the art of creating stunning websites", type: 'image', src: websiteImage },
+    { title: "Data Science", description: "Dive into the world of data analysis and machine learning", type: 'pdf', src: dsaPDF },
+    { title: "Mobile App Development", description: "Create powerful apps for iOS and Android", type: 'pdf', src: androidPDF },
   ];
+  
+  
+
+  const handleCardClick = (content) => {
+    setSelectedContent(content);
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+    setSelectedContent(null);
+  };
 
   return (
     <Parallax
@@ -26,10 +50,6 @@ const Cards = () => {
         <h1 className="head">Roadmaps</h1>
         <h3>Your next 4 year path is here choose your stream and start following this path from today!!</h3>
 
-        {/* <nav className="tab-navigation">
-          <Link to="/contact" className="tab-item">Contact</Link>
-        </nav> */}
-
         <main style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
           {cardContent.map((card, index) => (
             <motion.div
@@ -43,6 +63,7 @@ const Cards = () => {
                 boxShadow: "0px 0px 8px rgb(255,255,255)",
               }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => handleCardClick(card)}
             >
               <motion.div
                 className="card-content"
@@ -66,6 +87,27 @@ const Cards = () => {
             </motion.div>
           ))}
         </main>
+
+        {/* Modal for displaying content */}
+        <Modal
+          isOpen={isOpen}
+          onRequestClose={closeModal}
+          contentLabel="Content Viewer"
+          className="modal"
+        >
+          <button onClick={closeModal}>Close</button>
+          
+          {/* Display content based on type */}
+          {selectedContent?.type === 'image' && (
+            <img src={selectedContent.filePath} alt="Selected Visual" className="modal-image" />
+          )}
+
+          {selectedContent?.type === 'pdf' && (
+            <Document file={selectedContent.filePath}>
+              <Page pageNumber={1} />
+            </Document>
+          )}
+        </Modal>
       </div>
     </Parallax>
   );
