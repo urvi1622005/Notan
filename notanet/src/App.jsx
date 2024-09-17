@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import { Box, Flex, } from '@chakra-ui/react';
 import Home from './components/Nota.jsx';
-import Contact from './components/Cards.jsx';
+import Roadmaps from './components/Cards.jsx';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
         <Routes>
           {/* <Link> */}
           <Route path="/" element={<Home />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/Roadmaps" element={<Roadmaps />} />
           {/* </Link> */}
         </Routes>
         </Link>
