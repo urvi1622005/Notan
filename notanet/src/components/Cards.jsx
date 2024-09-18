@@ -1,30 +1,23 @@
 import React, { useState } from 'react';
-import './Cards.css';
 import { FaHome } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Parallax } from 'react-parallax';
+import Modal from 'react-modal';
+import './Cards.css';
 
-
-// Import the PDF viewer and image modal
-import { Document, Page } from 'react-pdf';
-import Modal from 'react-modal'; // For displaying images and PDF
-import websiteImage from '../assets/website.jpg';
-import dsaPDF from '../assets/dsa.pdf';
+import FullStackDeveloper from '../assets/full.pdf';
+import dsaPDF from '../assets/data-analyst.pdf';
 import androidPDF from '../assets/android.pdf';
-
 
 const Cards = () => {
   const [selectedContent, setSelectedContent] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
 
   const cardContent = [
-    { title: "Web Development", description: "Learn the art of creating stunning websites", type: 'image', src: websiteImage },
+    { title: "Full Stack Development", description:"Build complete web applications from front to back", type: 'pdf', src: FullStackDeveloper },
     { title: "Data Science", description: "Dive into the world of data analysis and machine learning", type: 'pdf', src: dsaPDF },
     { title: "Mobile App Development", description: "Create powerful apps for iOS and Android", type: 'pdf', src: androidPDF },
   ];
-  
-  
 
   const handleCardClick = (content) => {
     setSelectedContent(content);
@@ -67,7 +60,7 @@ const Cards = () => {
             >
               <motion.div
                 className="card-content"
-                whileHover={{ 
+                whileHover={{
                   background: [
                     "linear-gradient(45deg, #ff0000, #ff7300)",
                     "linear-gradient(45deg, #ff7300, #fffb00)",
@@ -88,7 +81,6 @@ const Cards = () => {
           ))}
         </main>
 
-        {/* Modal for displaying content */}
         <Modal
           isOpen={isOpen}
           onRequestClose={closeModal}
@@ -97,15 +89,18 @@ const Cards = () => {
         >
           <button onClick={closeModal}>Close</button>
           
-          {/* Display content based on type */}
           {selectedContent?.type === 'image' && (
-            <img src={selectedContent.filePath} alt="Selected Visual" className="modal-image" />
+            <img src={selectedContent.src} alt="Selected Visual" className="modal-image" />
           )}
 
           {selectedContent?.type === 'pdf' && (
-            <Document file={selectedContent.filePath}>
-              <Page pageNumber={1} />
-            </Document>
+            <iframe
+              src={selectedContent.src}
+              width="100%"
+              height="600px"
+              style={{border: 'none'}}
+              title="PDF Viewer"
+            />
           )}
         </Modal>
       </div>
