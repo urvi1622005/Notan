@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Text, Button, Flex, Link as ChakraLink, Icon, Circle } from '@chakra-ui/react';
+import { Box, Text, Button, Flex, Link as ChakraLink, Icon, Circle, Image } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import { FaHome, FaStickyNote, FaMapSigns, FaEnvelope, FaRoute, FaBook, FaChartLine } from 'react-icons/fa';
 import { motion } from 'framer-motion';
@@ -105,7 +105,7 @@ const Nota = () => {
   return (
     <Parallax
       blur={0}
-      // bgImage="/path/to/your/background-image.jpg"
+      bgImage="https://source.unsplash.com/random/1920x1080?education"
       strength={500}
     >
       <Box
@@ -228,7 +228,7 @@ const Nota = () => {
 
         <Parallax
           blur={0}
-          bgImage="/path/to/quote-background.jpg"
+          bgImage="https://source.unsplash.com/random/1920x1080?quote"
           strength={200}
         >
           <Box height="300px" display="flex" alignItems="center" justifyContent="center">
@@ -247,6 +247,16 @@ const Nota = () => {
         <RoadmapPreview />
 
         <CTASection />
+
+        <Box mt={16}>
+          <Text fontSize="3xl" fontWeight="bold" mb={8}>Our Learning Environment</Text>
+          <Image 
+            src="https://source.unsplash.com/random/800x600?classroom" 
+            alt="Learning Environment" 
+            borderRadius="md"
+            boxShadow="lg"
+          />
+        </Box>
       </Box>
     </Parallax>
   );
