@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import { Box, Text, Button, Flex, Link as ChakraLink, Icon, Circle, Image } from '@chakra-ui/react';
+import React, { useRef, useEffect } from 'react';
+import { Box, Text, Button, Flex, Link as ChakraLink, Icon, Circle } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
-import { FaHome, FaStickyNote, FaMapSigns, FaEnvelope, FaRoute, FaBook, FaChartLine } from 'react-icons/fa';
+import { FaEnvelope, FaRoute, FaBook, FaChartLine } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import { Parallax } from 'react-parallax';
 import { useInView } from 'react-intersection-observer';
-import { useCountUp } from 'react-countup';
+import CountUp from 'react-countup';
 import './Nota.css';
 
 const FeatureSection = ({ title, description, icon }) => {
@@ -31,7 +30,7 @@ const FeatureSection = ({ title, description, icon }) => {
 };
 
 const AnimatedStat = ({ end, suffix, text }) => {
-  const { countUp } = useCountUp({ end, duration: 2, suffix });
+  const countUpRef = useRef(null);
   const [ref, inView] = useInView({
     threshold: 0.1,
     triggerOnce: true,
@@ -44,14 +43,16 @@ const AnimatedStat = ({ end, suffix, text }) => {
       animate={inView ? { scale: 1, opacity: 1 } : { scale: 0.5, opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <Text fontSize="4xl" fontWeight="bold">{countUp}</Text>
+      <Text fontSize="4xl" fontWeight="bold">
+        <CountUp end={end} suffix={suffix} ref={countUpRef} />
+      </Text>
       <Text>{text}</Text>
     </motion.div>
   );
 };
 
 const RoadmapPreview = () => {
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = React.useState(0);
   const steps = ['Beginner', 'Intermediate', 'Advanced', 'Expert'];
 
   return (
@@ -91,9 +92,9 @@ const CTASection = () => {
       animate={inView ? { x: 0 } : { x: '-100%' }}
       transition={{ duration: 0.5 }}
     >
-      <Box bg="teal.600" color="white" p={8} borderRadius="md" mt={16}>
+      <Box color="white" p={8} borderRadius="md" mt={16}>
         <Text fontSize="3xl" fontWeight="bold" mb={4}>Ready to Start Your Learning Journey?</Text>
-        <Button as={RouterLink} to="/signup" size="lg" colorScheme="white" variant="outline">
+        <Button as={RouterLink} to="/signup" size="lg" colorScheme="teal" variant="outline">
           Get Started Now
         </Button>
       </Box>
@@ -103,162 +104,145 @@ const CTASection = () => {
 
 const Nota = () => {
   return (
-    <Parallax
-      blur={0}
-      bgImage="https://source.unsplash.com/random/1920x1080?education"
-      strength={500}
+    <Box
+      className="nota-container"
+      color="white"
+      width="100vw"
+      minH="100vh"
+      p={{ base: 4, md: 8, lg: 12, xl: 16 }}
+      maxWidth="100vw"
+      overflowX="hidden"
+      bg="gray.800"
     >
-      <Box
-        className="nota-container"
-        bg="linear-gradient(to top right, rgba(0,0,0,0.8) 50%, rgba(211,211,211,0.8) 100%)"
-        color="white"
-        width="100vw"
-        minH="100vh"
-        p={{ base: 4, md: 8, lg: 12, xl: 16 }}
-        maxWidth="100vw" 
-        overflowX="hidden"
+      <motion.nav
+        initial={{ y: -50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
       >
-        <motion.nav
-          initial={{ y: -50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Flex justify="space-between" align="center" flexDirection={{ base: 'column', md: 'row' }}>
-            <ChakraLink as={RouterLink} to="/" fontSize={{ base: 'xl', md: '2xl' }} fontWeight="bold" mb={{ base: 4, md: 0 }}>
-              <Icon as={FaEnvelope} mr={2} />
-              NOTANET.COM
-            </ChakraLink>
-            <Flex as="ul" align="center" gap={{ base: 2, md: 6 }} listStyleType="none">
-              {['Contact', 'Home', 'Notes', 'Roadmaps'].map((item, index) => (
-                <motion.li
-                  key={item}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <ChakraLink as={RouterLink} to={item === 'Home' ? '/' : `/${item.toLowerCase()}`} fontSize={{ base: 'md', md: 'lg' }}>
-                    {item}
-                  </ChakraLink>
-                </motion.li>
-              ))}
-            </Flex>
+        <Flex justify="space-between" align="center" flexDirection={{ base: 'column', md: 'row' }}>
+          <ChakraLink as={RouterLink} to="/" fontSize={{ base: 'xl', md: '2xl' }} fontWeight="bold" mb={{ base: 4, md: 0 }}>
+            <Icon as={FaEnvelope} mr={2} />
+            NOTANET.COM
+          </ChakraLink>
+          <Flex as="ul" align="center" gap={{ base: 2, md: 6 }} listStyleType="none">
+            {['Contact', 'Home', 'Notes', 'Roadmaps'].map((item) => (
+              <motion.li
+                key={item}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <ChakraLink as={RouterLink} to={item === 'Home' ? '/' : `/${item.toLowerCase()}`} fontSize={{ base: 'md', md: 'lg' }}>
+                  {item}
+                </ChakraLink>
+              </motion.li>
+            ))}
           </Flex>
-        </motion.nav>
-
-        <Flex direction="column" justify="space-between" maxWidth="1200px" width="100%" mx="auto" align="center" flex="1" textAlign="center" mt={{ base: 12, md: 24 }}>
-          <motion.div
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <Text fontSize={{ base: '2xl', md: '4xl', lg: '5xl' }} fontWeight="bold" textAlign="center">
-              Study made easier!
-            </Text>
-          </motion.div>
-          <motion.div
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            <Text fontSize={{ base: 'lg', md: 'xl' }} mt={{ base: 4, md: 8 }}>
-              A website with detailed roadmap and notes for structural growth of students!
-            </Text>
-          </motion.div>
-          <motion.div
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Button as={RouterLink} to="/" mt={{ base: 6, md: 10 }} size={{ base: 'md', md: 'lg' }} colorScheme="teal" variant="outline">
-              GO BACK HOME
-            </Button>
-          </motion.div>
         </Flex>
+      </motion.nav>
 
-        <Flex justify="center" flexWrap="wrap" width="100%" mt={{ base: 8, md: 16 }}>
-          <motion.div
-            initial={{ rotate: -10, opacity: 0 }}
-            animate={{ rotate: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-          >
-            <Text 
-              fontSize={{ base: '4xl', md: '6xl', lg: '8xl' }} 
-              fontWeight="bold" 
-              color="teal.300"
-              textShadow="2px 2px 4px rgba(0,0,0,0.5)"
-            >
-              start
-            </Text>
-          </motion.div>
-          <motion.div
-            initial={{ rotate: 10, opacity: 0 }}
-            animate={{ rotate: -1, opacity: 1 }}
-            transition={{ duration: 2, delay: 1 }}
-          >
-            <Text 
-              fontSize={{ base: '4xl', md: '6xl', lg: '8xl' }} 
-              fontWeight="bold" 
-              ml={{ base: 2, md: -3, lg: 2 }}
-              color="white"
-              textShadow="2px 2px 4px rgba(0,0,0,0.5)"
-            >
-               LEARNIN'
-            </Text>
-          </motion.div>
-        </Flex>
-
-        <Box mt={16}>
-          <FeatureSection
-            title="Personalized Learning Paths"
-            description="Tailored roadmaps to guide your educational journey."
-            icon={FaRoute}
-          />
-          <FeatureSection
-            title="Comprehensive Notes"
-            description="Detailed study materials for in-depth understanding."
-            icon={FaBook}
-          />
-          <FeatureSection
-            title="Progress Tracking"
-            description="Monitor your growth and celebrate milestones."
-            icon={FaChartLine}
-          />
-        </Box>
-
-        <Parallax
-          blur={0}
-          bgImage="https://source.unsplash.com/random/1920x1080?quote"
-          strength={200}
+      <Flex direction="column" justify="space-between" maxWidth="1200px" width="100%" mx="auto" align="center" flex="1" textAlign="center" mt={{ base: 12, md: 24 }}>
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <Box height="300px" display="flex" alignItems="center" justifyContent="center">
-            <Text fontSize="3xl" fontStyle="italic" textAlign="center" px={4}>
-              "Education is the passport to the future, for tomorrow belongs to those who prepare for it today."
-            </Text>
-          </Box>
-        </Parallax>
+          <Text fontSize={{ base: '2xl', md: '4xl', lg: '5xl' }} fontWeight="bold" textAlign="center">
+            Study made easier!
+          </Text>
+        </motion.div>
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          <Text fontSize={{ base: 'lg', md: 'xl' }} mt={{ base: 4, md: 8 }}>
+            A website with detailed roadmap and notes for structural growth of students!
+          </Text>
+        </motion.div>
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <Button as={RouterLink} to="/" mt={{ base: 6, md: 10 }} size={{ base: 'md', md: 'lg' }} colorScheme="teal" variant="outline">
+            GO BACK HOME
+          </Button>
+        </motion.div>
+      </Flex>
 
-        <Flex justify="space-around" mt={16}>
-          <AnimatedStat end={10000} suffix="+" text="Students" />
-          <AnimatedStat end={500} suffix="+" text="Courses" />
-          <AnimatedStat end={95} suffix="%" text="Satisfaction Rate" />
-        </Flex>
+      <Flex justify="center" flexWrap="wrap" width="100%" mt={{ base: 8, md: 16 }}>
+        <motion.div
+          initial={{ rotate: -10, opacity: 0 }}
+          animate={{ rotate: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+        >
+          <Text
+            fontSize={{ base: '4xl', md: '6xl', lg: '8xl' }}
+            fontWeight="bold"
+            color="teal.300"
+            textShadow="2px 2px 4px rgba(0,0,0,0.5)"
+          >
+            start
+          </Text>
+        </motion.div>
+        <motion.div
+          initial={{ rotate: 10, opacity: 0 }}
+          animate={{ rotate: -1, opacity: 1 }}
+          transition={{ duration: 2, delay: 1 }}
+        >
+          <Text
+            fontSize={{ base: '4xl', md: '6xl', lg: '8xl' }}
+            fontWeight="bold"
+            ml={{ base: 2, md: -3, lg: 2 }}
+            color="white"
+            textShadow="2px 2px 4px rgba(0,0,0,0.5)"
+          >
+            LEARNIN'
+          </Text>
+        </motion.div>
+      </Flex>
 
-        <RoadmapPreview />
-
-        <CTASection />
-
-        <Box mt={16}>
-          <Text fontSize="3xl" fontWeight="bold" mb={8}>Our Learning Environment</Text>
-          <Image 
-            src="https://source.unsplash.com/random/800x600?classroom" 
-            alt="Learning Environment" 
-            borderRadius="md"
-            boxShadow="lg"
-          />
-        </Box>
+      <Box mt={16}>
+        <FeatureSection
+          title="Personalized Learning Paths"
+          description="Tailored roadmaps to guide your educational journey."
+          icon={FaRoute}
+        />
+        <FeatureSection
+          title="Comprehensive Notes"
+          description="Detailed study materials for in-depth understanding."
+          icon={FaBook}
+        />
+        <FeatureSection
+          title="Progress Tracking"
+          description="Monitor your growth and celebrate milestones."
+          icon={FaChartLine}
+        />
       </Box>
-    </Parallax>
+
+      <Box height="300px" display="flex" alignItems="center" justifyContent="center">
+        <Text fontSize="3xl" fontStyle="italic" textAlign="center" px={4}>
+          "Education is the passport to the future, for tomorrow belongs to those who prepare for it today."
+        </Text>
+      </Box>
+
+      <Flex justify="space-around" mt={16}>
+        <AnimatedStat end={10000} suffix="+" text="Students" />
+        <AnimatedStat end={500} suffix="+" text="Courses" />
+        <AnimatedStat end={95} suffix="%" text="Satisfaction Rate" />
+      </Flex>
+
+      <RoadmapPreview />
+
+      <CTASection />
+
+      <Box mt={16}>
+        <Text fontSize="3xl" fontWeight="bold" mb={8}>Our Learning Environment</Text>
+        <Text>A description of our learning environment goes here.</Text>
+      </Box>
+    </Box>
   );
 };
 
