@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { CardBody, CardContainer, CardItem } from "../components/3d-card";
-
-
-import Image from "next/image";
 import './Contact.css';
 
 const teachers = [
@@ -45,10 +42,10 @@ const Contact = () => {
         placeholder="Search teachers by name or subject..."
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <div className="grid">
+      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {filteredTeachers.map((teacher, index) => (
           <CardContainer key={index} className="inter-var">
-            <CardBody className="bg-gray-800 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] border-white/[0.2] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border">
+            <CardBody className="bg-gray-800 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] border-white/[0.2] w-full h-auto rounded-xl p-4 border border-gray-600">
               <CardItem translateZ="50" className="text-xl font-bold text-white">
                 {teacher.name}
               </CardItem>
@@ -56,15 +53,13 @@ const Contact = () => {
                 {teacher.subject}
               </CardItem>
               <CardItem translateZ="100" className="w-full mt-4">
-                <Image
+                <img
                   src={teacher.image}
-                  height="1000"
-                  width="1000"
-                  className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
+                  className="h-40 w-full object-cover rounded-xl group-hover/card:shadow-xl"
                   alt={teacher.name}
                 />
               </CardItem>
-              <div className="flex justify-between items-center mt-20">
+              <div className="flex justify-between items-center mt-4">
                 <CardItem translateZ={20} className="text-white">
                   Cabin: {teacher.cabin}
                 </CardItem>
