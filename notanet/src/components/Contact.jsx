@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
+import { CardBody, CardContainer, CardItem } from "../components/3d-card";
 
 
-// import Image from "next/image";
+import Image from "next/image";
 import './Contact.css';
 
 const teachers = [
