@@ -3,6 +3,10 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Box, Flex } from '@chakra-ui/react';
 import Nota from './components/Nota.jsx';
 import Roadmaps from './components/Cards.jsx';
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root'); 
+
 import Contact from'./components/Contact.jsx';
 
 function App() {
