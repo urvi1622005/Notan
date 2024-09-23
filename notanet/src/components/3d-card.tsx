@@ -1,6 +1,9 @@
 "use client";
 
-// import { cn } from "@/lib/utils";
+export function cn(...classes: string[]) {
+  return classes.filter(Boolean).join(' ');
+}
+
 import Image from "next/image";
 import React, {
   createContext,
