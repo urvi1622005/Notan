@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import {
   Box,
   Text,
@@ -16,7 +16,7 @@ import {
   FaChartLine,
   FaHome,
   FaUser,
-  FaNoteSticky,
+  FaStickyNote, // Changed this line
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -161,7 +161,7 @@ const Nota = () => {
             {[
               { name: "Contact", icon: FaUser },
               { name: "Home", icon: FaHome },
-              { name: "Notes", icon: FaNoteSticky },
+              { name: "Notes", icon: FaStickyNote }, // Updated this line
               { name: "Roadmaps", icon: FaRoute },
             ].map((item) => (
               <motion.li key={item.name} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
@@ -214,19 +214,20 @@ const Nota = () => {
           </Button>
         </motion.div>
       </Flex>
+
       <Flex justify="center" flexWrap="wrap" width="100%" mt={{ base: 8, md: 16 }}>
-        <motion.div
-          initial={{ rotate: -10, opacity: 0 }}
-          animate={{ rotate: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-        >
-          <Text
-            fontSize={{ base: '4xl', md: '6xl', lg: '8xl' }}
+        <motion.div initial={{ rotate: -10, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} transition={{ duration: 0.8, delay: 0.8 }}>
+          <Text fontSize={{ base: "4xl", md: "6xl", lg: "8xl" }} fontWeight="bold" color="teal.300" textShadow="2px 2px 4px rgba(0,0,0,0.5)">
+            start
+          </Text>
+        </motion.div>
+        <motion.div initial={{ rotate: 10, opacity: 0 }} animate={{ rotate: -1, opacity: 1 }} transition={{ duration: 2, delay: 1 }}>
+          <Text fontSize={{ base: "4xl", md: "6xl", lg: "8xl" }}
             fontWeight="bold"
             color="teal.300"
             textShadow="2px 2px 4px rgba(0,0,0,0.5)"
           >
-            start
+            
           </Text>
         </motion.div>
         <motion.div
