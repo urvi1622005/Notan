@@ -45,27 +45,29 @@ const Contact = () => {
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {filteredTeachers.map((teacher, index) => (
           <CardContainer key={index} className="inter-var">
-            <CardBody className="bg-gray-800 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] border-white/[0.2] w-full h-auto rounded-xl p-4 border border-gray-600">
-              <CardItem translateZ="50" className="text-xl font-bold text-white">
-                {teacher.name}
-              </CardItem>
-              <CardItem as="p" translateZ="60" className="text-neutral-300 text-sm max-w-sm mt-2">
-                {teacher.subject}
-              </CardItem>
-              <CardItem translateZ="100" className="w-full mt-4">
+            <CardBody className="teacher-card">
+              <CardItem translateZ="50" className="teacher-image-container">
                 <img
                   src={teacher.image}
-                  className="h-40 w-full object-cover rounded-xl group-hover/card:shadow-xl"
+                  className="teacher-image"
                   alt={teacher.name}
                 />
               </CardItem>
-              <div className="flex justify-between items-center mt-4">
-                <CardItem translateZ={20} className="text-white">
-                  Cabin: {teacher.cabin}
+              <div className="teacher-info-box">
+                <CardItem translateZ="50" className="teacher-name">
+                  {teacher.name}
                 </CardItem>
-                <CardItem translateZ={20} className="text-white">
-                  Contact: {teacher.contact}
+                <CardItem as="p" translateZ="60" className="teacher-subject">
+                  {teacher.subject}
                 </CardItem>
+                <div className="teacher-details">
+                  <CardItem translateZ={20} className="teacher-cabin">
+                    Cabin: {teacher.cabin}
+                  </CardItem>
+                  <CardItem translateZ={20} className="teacher-contact">
+                    Contact: {teacher.contact}
+                  </CardItem>
+                </div>
               </div>
             </CardBody>
           </CardContainer>
