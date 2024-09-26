@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Parallax } from 'react-parallax';
 import Modal from 'react-modal';
 import './Cards.css';
+import { EvervaultCard, Icon } from "../components/ui/evervault-card";
 
 import FullStackDeveloper from '../assets/full.pdf';
 import dsaPDF from '../assets/data-analyst.pdf';
@@ -14,7 +15,7 @@ const Cards = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const cardContent = [
-    { title: "Full Stack Development", description:"Build complete web applications from front to back", type: 'pdf', src: FullStackDeveloper },
+    { title: "Full Stack Development", description: "Build complete web applications from front to back", type: 'pdf', src: FullStackDeveloper },
     { title: "Data Science", description: "Dive into the world of data analysis and machine learning", type: 'pdf', src: dsaPDF },
     { title: "Mobile App Development", description: "Create powerful apps for iOS and Android", type: 'pdf', src: androidPDF },
   ];
@@ -43,7 +44,7 @@ const Cards = () => {
         <h1 className="head">Roadmaps</h1>
         <h3>Your next 4 year path is here choose your stream and start following this path from today!!</h3>
 
-        <main style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
+        <main style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', minHeight: '70vh' }}>
           {cardContent.map((card, index) => (
             <motion.div
               key={index}
@@ -60,18 +61,18 @@ const Cards = () => {
             >
               <motion.div
                 className="card-content"
-                whileHover={{
-                  background: [
-                    "linear-gradient(45deg, #ff0000, #ff7300)",
-                    "linear-gradient(45deg, #ff7300, #fffb00)",
-                    "linear-gradient(45deg, #fffb00, #48ff00)",
-                    "linear-gradient(45deg, #48ff00, #00ffd5)",
-                    "linear-gradient(45deg, #00ffd5, #002bff)",
-                    "linear-gradient(45deg, #002bff, #7a00ff)",
-                    "linear-gradient(45deg, #7a00ff, #ff00c8)",
-                    "linear-gradient(45deg, #ff00c8, #ff0000)"
-                  ]
-                }}
+                // whileHover={{
+                //   background: [
+                //     "linear-gradient(45deg, #ff0000, #ff7300)",
+                //     "linear-gradient(45deg, #ff7300, #fffb00)",
+                //     "linear-gradient(45deg, #fffb00, #48ff00)",
+                //     "linear-gradient(45deg, #48ff00, #00ffd5)",
+                //     "linear-gradient(45deg, #00ffd5, #002bff)",
+                //     "linear-gradient(45deg, #002bff, #7a00ff)",
+                //     "linear-gradient(45deg, #7a00ff, #ff00c8)",
+                //     "linear-gradient(45deg, #ff00c8, #ff0000)"
+                //   ]
+                // }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
                 <h2>{card.title}</h2>
@@ -79,6 +80,20 @@ const Cards = () => {
               </motion.div>
             </motion.div>
           ))}
+
+          <div className="border border-black/[0.2] dark:border-white/[0.2] flex flex-col items-start max-w-sm mx-auto p-4 relative h-[30rem]">
+            <Icon className="absolute h-6 w-6 -top-3 -left-3 dark:text-white text-black" />
+            <Icon className="absolute h-6 w-6 -bottom-3 -left-3 dark:text-white text-black" />
+            <Icon className="absolute h-6 w-6 -top-3 -right-3 dark:text-white text-black" />
+            <Icon className="absolute h-6 w-6 -bottom-3 -right-3 dark:text-white text-black" />
+            <EvervaultCard text="hover" />
+            <h2 className="dark:text-white text-black mt-4 text-sm font-light">
+              Hover over this card to reveal an awesome effect. Running out of copy here.
+            </h2>
+            <p className="text-sm border font-light dark:border-white/[0.2] border-black/[0.2] rounded-full mt-4 text-black dark:text-white px-2 py-0.5">
+              Watch me hover
+            </p>
+          </div>
         </main>
 
         <Modal
